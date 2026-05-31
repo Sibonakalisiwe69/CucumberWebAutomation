@@ -16,7 +16,7 @@ Feature: Group Creation and Validation
     And I click log out
     When I confirm logout
     And I navigate to signup page
-    Then Created group should be visible in group dropdown
+    Then the created "<groupName>" should be displayed in the group dropdown
 
     Examples:
       | email              | password  | groupName       | groupDescription | year | maxCapacity | startDate  | endDate    |

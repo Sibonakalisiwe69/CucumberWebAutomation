@@ -4,6 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -32,6 +33,8 @@ public class GroupPage {
     By backButton = By.xpath("//button[normalize-space()='← Back to Website']");
     By LogoutButton = By.xpath("//span[normalize-space()='Logout']");
     By LoginButton = By.xpath("//span[normalize-space()='Login']");
+    By signupButton = By.id("signup-toggle");
+    By getGroupName = By.id("register-group");
 
 
     public void openGroup() {
@@ -86,18 +89,42 @@ public class GroupPage {
     public void clickbackButton() {
         driver.findElement(backButton).click();
     }
+
     public void clickLogoutButton() {
-        WebElement loginButton = new WebDriverWait(driver, Duration.ofSeconds(15))
+        WebElement logButton = new WebDriverWait(driver, Duration.ofSeconds(15))
                 .until(visibilityOfElementLocated(LogoutButton));
-        loginButton.click();
-        driver.findElement(LoginButton).click();
+        logButton.click();
+
     }
 
 
+    public void clicklogButton() {
+        WebElement logButton = new WebDriverWait(driver, Duration.ofSeconds(15))
+                .until(visibilityOfElementLocated(LoginButton));
+        logButton.click();
 
+    }
+    public void clickSignupButton() {
+        driver.findElement(signupButton).click();
 
+    }
+    public void verifyGroupVisibleInDropdown(String expectedGroupName) {
+        Select dropdown = new Select((WebElement) getGroupName);
+
+        boolean found = dropdown.getOptions().stream()
+                .map(option -> option.getText().trim())
+                .anyMatch(group -> group.equals(expectedGroupName));
+
+        Assert.assertTrue(
+                found,
+                "Expected group '" + expectedGroupName + "' was not found in the dropdown."
+        );
+    }
 
 
 }
+
+
+
 
 

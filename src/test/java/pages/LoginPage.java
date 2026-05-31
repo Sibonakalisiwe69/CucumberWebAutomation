@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class LoginPage {
 
@@ -25,7 +26,7 @@ public class LoginPage {
 
     public void verifyLoginPageIsDisplayed() {
         new WebDriverWait(driver, Duration.ofSeconds(15))
-                .until(ExpectedConditions.visibilityOfElementLocated(loginHeading_xpath));
+                .until(visibilityOfElementLocated(loginHeading_xpath));
     }
 
 
@@ -38,6 +39,9 @@ public class LoginPage {
     }
 
     public void clickLoginButton() {
-        driver.findElement(loginButton).click();
+       driver.findElement(loginButton).click();
+
     }
+
 }
+

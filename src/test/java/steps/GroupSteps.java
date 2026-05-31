@@ -9,13 +9,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import pages.*;
+
 import java.time.Duration;
 
 
-
-
 public class GroupSteps extends Base {
-
 
 
     @Given("I am on the login page")
@@ -106,5 +104,17 @@ public class GroupSteps extends Base {
     public void i_confirm_logout() {
         Alert alert = driver.switchTo().alert();
         alert.accept();
+    }
+
+    @And("I navigate to signup page")
+    public void i_navigate_to_signup_page() {
+        groupPage.clicklogButton();
+        groupPage.clickSignupButton();
+    }
+
+
+    @Then("the created {string} should be displayed in the group dropdown")
+    public void verifyCreatedGroupDisplayedInDropdown(String groupName) {
+        groupPage.verifyGroupVisibleInDropdown(groupName);
     }
 }
